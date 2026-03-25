@@ -32,11 +32,15 @@ async def async_setup(hass: HomeAssistant, config: dict) -> bool:
         _LOGGER.warning("Could not register Hockey NL card static path: %s", err)
 
     try:
-        from homeassistant.components.frontend import add_extra_js_url
-        add_extra_js_url(hass, resource_url)
-        _LOGGER.debug("Added Hockey NL card as frontend JS module")
+        from homeassistant.components.lovelace.resources import ResourceStorageCollection
+        resources: ResourceStorageCollection = hass.data["lovelace"]["resources"]
+        await resources.async_load()
+        existing = [r["url"] for r in resources.async_items()]
+        if resource_url not in existing:
+            await resources.async_create_item({"res_type": "js", "url": resource_url})
+            _LOGGER.debug("Added Hockey NL card as Lovelace resource")
     except Exception as err:
-        _LOGGER.warning("Could not add Hockey NL card to frontend: %s", err)
+        _LOGGER.warning("Could not add Hockey NL card to Lovelace resources: %s", err)
 
     return True
 
