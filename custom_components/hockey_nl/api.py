@@ -124,9 +124,9 @@ class HockeyNLApi:
             away = m.get("away", {})
             if home.get("id") != team_id and away.get("id") != team_id:
                 continue  # not our team
-            loc = m.get("location", {})
-            facility = loc.get("facility", {})
-            field = loc.get("field", {})
+            loc = m.get("location") or {}
+            facility = loc.get("facility") or {}
+            field = loc.get("field") or {}
             is_home = home.get("id") == team_id
             opponent = away if is_home else home
             matches.append(
@@ -141,14 +141,14 @@ class HockeyNLApi:
                     "away_logo": away.get("logo", ""),
                     "opponent": opponent.get("name", ""),
                     "opponent_logo": opponent.get("logo", ""),
-                    "score_home": m.get("score", {}).get("home"),
-                    "score_away": m.get("score", {}).get("away"),
+                    "score_home": (m.get("score") or {}).get("home"),
+                    "score_away": (m.get("score") or {}).get("away"),
                     "facility_name": facility.get("name", ""),
                     "facility_address": facility.get("address", ""),
                     "field_name": field.get("name", ""),
                     "field_type": field.get("type", ""),
                     "round": m.get("round"),
-                    "remarks": m.get("remarks", {}).get("official", ""),
+                    "remarks": (m.get("remarks") or {}).get("official", ""),
                     "poule_id": m.get("poule_id"),
                 }
             )
