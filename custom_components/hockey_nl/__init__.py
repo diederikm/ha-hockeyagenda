@@ -29,7 +29,14 @@ async def async_setup(hass: HomeAssistant, config: dict) -> bool:
         ])
         _LOGGER.debug("Registered Hockey NL card at %s", resource_url)
     except Exception as err:
-        _LOGGER.warning("Could not register Hockey NL card: %s", err)
+        _LOGGER.warning("Could not register Hockey NL card static path: %s", err)
+
+    try:
+        from homeassistant.components.frontend import add_extra_js_url
+        add_extra_js_url(hass, resource_url)
+        _LOGGER.debug("Added Hockey NL card as frontend JS module")
+    except Exception as err:
+        _LOGGER.warning("Could not add Hockey NL card to frontend: %s", err)
 
     return True
 
