@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import logging
-import os
 
 from homeassistant.core import HomeAssistant
 from homeassistant.config_entries import ConfigEntry
@@ -20,27 +19,17 @@ async def async_setup(hass: HomeAssistant, config: dict) -> bool:
     """Register the Lovelace card as a frontend resource."""
     hass.data.setdefault(DOMAIN, {})
 
-    # Register the card JS so users don't need to add it manually
     resource_url = f"/hockey_nl/hockey-nl-card.js"
-    hass.http.register_static_path(
-        resource_url,
-        hass.config.path(f"custom_components/{DOMAIN}/www/hockey-nl-card.js"),
-        cache_headers=False,
-    )
+    card_path = hass.config.path(f"custom_components/{DOMAIN}/www/hockey-nl-card.js")
 
-    # Add as Lovelace resource if not already registered
     try:
-        from homeassistant.components.lovelace import async_get_dashboard
-        lovelace = hass.data.get("lovelace")
-        if lovelace:
-            resources = lovelace.get("resources", [])
-            already_registered = any(
-                resource_url in r.get("url", "") for r in resources
-            )
-            if not already_registered:
-                _LOGGER.debug("Registered Hockey NL card as Lovelace resource")
-    except Exception:
-        pass  # Non-critical — user can add manually if needed
+        from homeassistant.components.http import StaticPathConfig
+        await hass.http.async_register_static_paths([
+            StaticPathConfig(resource_url, card_path, cache_headers=False)
+        ])
+        _LOGGER.debug("Registered Hockey NL card at %s", resource_url)
+    except Exception as err:
+        _LOGGER.warning("Could not register Hockey NL card: %s", err)
 
     return True
 
