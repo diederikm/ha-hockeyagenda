@@ -88,6 +88,8 @@ class HockeyMatchSensor(SensorEntity):
 
     async def async_update(self) -> None:
         try:
+            _LOGGER.debug("Updating sensor for %s (poule=%s, team=%s)", self._display_name, self._poule_id, self._team_id)
             self._match = await self._api.get_next_match(self._poule_id, self._team_id)
+            _LOGGER.debug("Next match for %s: %s", self._display_name, self._match)
         except Exception as err:
-            _LOGGER.error("Error updating Hockey NL sensor for %s: %s", self._display_name, err)
+            _LOGGER.error("Error updating Hockey NL sensor for %s: %s", self._display_name, err, exc_info=True)

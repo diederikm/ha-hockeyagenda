@@ -70,7 +70,9 @@ class HockeyNLApi:
             "X-HAPI-Version": API_VERSION,
             "Accept": "application/json",
         }
+        _LOGGER.debug("GET %s", BASE_URL + path)
         async with self._session.get(BASE_URL + path, headers=headers) as resp:
+            _LOGGER.debug("Response %s for %s", resp.status, path)
             resp.raise_for_status()
             return await resp.json()
 
