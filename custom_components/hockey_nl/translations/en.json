@@ -1,0 +1,32 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Search hockey club",
+        "description": "Type (part of) the club name, e.g. 'Amsterdam'",
+        "data": {
+          "club_search": "Search club",
+          "club_name": "Select club"
+        }
+      },
+      "team": {
+        "title": "Select team",
+        "description": "Select a team from {club_name}",
+        "data": {
+          "team_name": "Team",
+          "display_name": "Display name (optional, e.g. 'Thomas')",
+          "add_another": "Add another team"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot connect to the Hockey NL API",
+      "no_clubs_found": "No clubs found with this name",
+      "no_teams_found": "No teams found for this club"
+    },
+    "abort": {
+      "cannot_connect": "Cannot connect",
+      "no_teams_found": "No teams found for this club"
+    }
+  }
+}

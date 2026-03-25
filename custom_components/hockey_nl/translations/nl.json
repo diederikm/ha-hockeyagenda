@@ -1,0 +1,32 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Zoek hockeyclub",
+        "description": "Typ (een deel van) de naam van de club, bijv. 'Amsterdam'",
+        "data": {
+          "club_search": "Zoek club",
+          "club_name": "Selecteer club"
+        }
+      },
+      "team": {
+        "title": "Selecteer team",
+        "description": "Selecteer een team van {club_name}",
+        "data": {
+          "team_name": "Team",
+          "display_name": "Weergavenaam (optioneel, bijv. 'Thomas')",
+          "add_another": "Nog een team toevoegen"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Kan geen verbinding maken met de Hockey NL API",
+      "no_clubs_found": "Geen clubs gevonden met deze naam",
+      "no_teams_found": "Geen teams gevonden voor deze club"
+    },
+    "abort": {
+      "cannot_connect": "Kan geen verbinding maken",
+      "no_teams_found": "Geen teams gevonden voor deze club"
+    }
+  }
+}
