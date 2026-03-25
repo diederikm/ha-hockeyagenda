@@ -60,12 +60,12 @@ title: Thomas - JO12
 |---|---|
 | `date` | `2026-03-28T09:40:00+01:00` |
 | `is_home` | `false` |
-| `home_team` | `HBS JO12-2` |
-| `away_team` | `Bloemendaal JO12-3` |
-| `opponent` | `HBS JO12-2` |
+| `home_team` | `Amsterdam JO12-2` |
+| `away_team` | `Pinoké JO12-3` |
+| `opponent` | `Amsterdam JO12-2` |
 | `opponent_logo` | `https://...` |
-| `facility_name` | `Sportpark 'Bleek en Berg'` |
-| `facility_address` | `Bergweg 1, Bloemendaal` |
+| `facility_name` | `Sportpark Wagener` |
+| `facility_address` | `Sportlaan 1, Amsterdam` |
 | `field_name` | `KG 3 Veld 3` |
 | `field_type` | `Waterveld` |
 | `round` | `4` |
