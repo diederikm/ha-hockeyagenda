@@ -106,4 +106,4 @@ class HockeyCalendar(CalendarEntity):
         try:
             self._matches = await self._api.get_matches(self._poule_id, self._team_id)
         except Exception as err:
-            _LOGGER.error("Error updating Hockey NL calendar for %s: %s", self._display_name, err)
+            _LOGGER.error("Error updating Hockey NL calendar for %s: %s", self._display_name, err, exc_info=True)

@@ -112,7 +112,11 @@ class HockeyNLApi:
     async def get_matches(self, poule_id: int, team_id: int) -> list[dict]:
         """Return all matches for a team, normalised to a stable schema."""
         data = await self._get(f"/poules/{poule_id}/teams/{team_id}")
-        raw_matches = data.get("data", {}).get("poule", {}).get("matches", [])
+        _LOGGER.debug("get_matches response keys: %s", list(data.keys()) if data else None)
+        data_obj = data.get("data") or {}
+        poule_obj = data_obj.get("poule") or {}
+        raw_matches = poule_obj.get("matches") or []
+        _LOGGER.debug("Found %d raw matches for team %s", len(raw_matches), team_id)
 
         matches = []
         for m in raw_matches:
